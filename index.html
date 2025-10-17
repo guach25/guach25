@@ -12,36 +12,56 @@
             justify-content:center;
             height:100vh;
             margin:0;
-            background:linear-gradient(180deg,#f5f7fb 0%, #eef3fa 100%);
+            /* Base de fondo un poco más marcada */
+            background: linear-gradient(180deg, #eaf6ff 0%, #e6f0ff 60%, #f6fbff 100%);
             position:relative;
             overflow:hidden;
             z-index:0;
         }
 
-        /* Fondo suave con "imagen" creada por gradientes y manchas suaves */
+        /* Fondo suave con "imagen" creada por gradientes y manchas suaves.
+           Ajustado para mayor visibilidad: menos blur, colores más intensos y
+           capa extra para contraste. */
         body::before {
-            content:"";
-            position:fixed;
-            inset:0;
-            z-index:0;
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
             background-image:
-                radial-gradient( circle at 10% 20%, rgba(255,200,210,0.35) 0%, rgba(255,200,210,0.00) 30% ),
-                radial-gradient( circle at 80% 60%, rgba(200,230,255,0.35) 0%, rgba(200,230,255,0.00) 30% ),
-                radial-gradient( circle at 50% 80%, rgba(200,255,220,0.30) 0%, rgba(200,255,220,0.00) 30% ),
-                linear-gradient(135deg, rgba(250,250,255,0.9), rgba(245,250,255,0.85));
-            background-blend-mode: overlay;
-            filter: blur(18px) saturate(110%);
-            transform: scale(1.05);
-            opacity:0.95;
-            pointer-events:none;
+                radial-gradient( circle at 12% 22%, rgba(255,180,200,0.72) 0%, rgba(255,180,200,0.00) 40% ),
+                radial-gradient( circle at 78% 60%, rgba(170,210,255,0.70) 0%, rgba(170,210,255,0.00) 42% ),
+                radial-gradient( circle at 50% 82%, rgba(200,255,220,0.58) 0%, rgba(200,255,220,0.00) 38% ),
+                linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,250,255,0.88));
+            background-blend-mode: screen, screen, screen, normal;
+            filter: blur(10px) saturate(120%);
+            transform: scale(1.03);
+            opacity: 0.98;
+            pointer-events: none;
+        }
+
+        /* Capa extra para dar textura y contraste sin usar imágenes externas.
+           Usa mezcla 'multiply' para oscurecer ligermente donde hace falta. */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            background-image:
+                radial-gradient(circle at 20% 30%, rgba(255,235,240,0.38), rgba(255,235,240,0) 35%),
+                radial-gradient(circle at 85% 70%, rgba(220,240,255,0.38), rgba(220,240,255,0) 36%);
+            mix-blend-mode: multiply;
+            filter: blur(22px) contrast(105%);
+            opacity: 0.9;
+            pointer-events: none;
         }
 
         .welcome {
             text-align:center;
             padding:2rem;
             border-radius:12px;
-            background: rgba(255,255,255,0.88);
-            box-shadow:0 6px 30px rgba(20,30,60,0.10);
+            /* Hacer la tarjeta un poco más translúcida para dejar ver el fondo */
+            background: rgba(255,255,255,0.80);
+            box-shadow:0 8px 40px rgba(20,30,60,0.12);
             backdrop-filter: blur(6px);
             position:relative;
             z-index:1;
